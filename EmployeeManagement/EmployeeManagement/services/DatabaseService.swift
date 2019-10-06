@@ -30,7 +30,9 @@ final class DatabaseService{
             employees = try persistentContainer.viewContext.fetch(request)
             if employees != nil{
                 employees = employees!.sorted(by: { (emp1, emp2) -> Bool in
-                    return emp1.name! < emp2.name!
+                    guard let name1 = emp1.name else{ return false }
+                    guard let name2 = emp1.name else{ return true }
+                    return name1 < name2
                 })
             }
         }catch{

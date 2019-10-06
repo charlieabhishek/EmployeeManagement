@@ -72,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				EF2B19F32344C467009A1CD5 /* EmployeeManagement */,
-				EF2B1A0D2344C469009A1CD5 /* EmployeeManagementTests */,
 				EF2B19F22344C467009A1CD5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +94,7 @@
 				EF2B19F42344C467009A1CD5 /* AppDelegate.swift */,
 				EF2B19F62344C467009A1CD5 /* SceneDelegate.swift */,
 				EF2B1A002344C469009A1CD5 /* Assets.xcassets */,
+				EF2B1A0D2344C469009A1CD5 /* EmployeeManagementTests */,
 				EF2B1A022344C469009A1CD5 /* LaunchScreen.storyboard */,
 				EF2B1A052344C469009A1CD5 /* Info.plist */,
 				EF2B19FD2344C467009A1CD5 /* EmployeeManagement.xcdatamodeld */,

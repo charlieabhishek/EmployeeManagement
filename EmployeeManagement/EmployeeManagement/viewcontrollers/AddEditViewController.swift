@@ -17,33 +17,55 @@ class AddEditViewController: UIViewController {
     @IBOutlet weak var emailIdTextField: UITextField!
     @IBOutlet weak var selectedCityLabel: UILabel!
     @IBOutlet weak var marriageStatusSwitch: UISwitch!
-    @IBOutlet weak var anniversaryTextField: UITextField!
-    
     
     var selectedCity:String?
+    var isEditMode = false
+    var employeeMO:Employee?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isEditMode{
+            nameTextField.text = employeeMO?.name
+            emailIdTextField.text = employeeMO?.emailId
+            marriageStatusSwitch.isOn = employeeMO?.married ?? false
+            selectedCityLabel.text = employeeMO?.city
+            selectedCity = employeeMO?.city
+        }
     }
     
     @IBAction func saveEmployeeData(_ sender: UIButton) {
-        let newEmployee = Employee(context: self.context)
-        if let name = nameTextField.text{
-            newEmployee.name = name
+        
+        guard let name = nameTextField.text, let email = emailIdTextField.text, let city = selectedCity else{
+            showToast(message: "Please fill out all fields", seconds: 2, backgrndColor: .red, radius: 20)
+            return
+        }
+        if name.isEmpty || email.isEmpty || city.isEmpty {
+            showToast(message: "Please fill out all fields", seconds: 2, backgrndColor: .red, radius: 20)
+            return
         }
         
-        if let email = emailIdTextField.text{
-            newEmployee.emailId = email
+        if isEditMode{
+            setEmployeeManagedObject(employeeMO: employeeMO, name: name, city: city, emailId: email)
+        } else{
+            let newEmployee = Employee(context: self.context)
+            setEmployeeManagedObject(employeeMO: newEmployee, name: name, city: city, emailId: email)
         }
         
-        if let city = selectedCity {
-            newEmployee.city = city
-        }
-        newEmployee.married = (anniversaryTextField.isHidden) ? false:true
-                
         DatabaseService.shared.saveContext()
         NotificationCenter.default.post(name: NSNotification.Name.init("DATA_CHANGED"), object: nil, userInfo: nil)
-        resetUI()
+        if isEditMode{
+            showToast(message: "Record Updated Successfully", seconds: 2,backgrndColor: .blue)
+        }else{
+            showToast(message: "Record Saved Successfully", seconds: 2,backgrndColor: .purple)
+            resetUI()
+        }
+    }
+    
+    func setEmployeeManagedObject(employeeMO: Employee?, name:String, city:String, emailId:String){
+        employeeMO?.name = name
+        employeeMO?.city = city
+        employeeMO?.emailId = emailId
+        employeeMO?.married = marriageStatusSwitch.isOn
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,7 +77,6 @@ class AddEditViewController: UIViewController {
         }
     }
     
-    
     @IBAction func selectCityViewButtonAction(_ sender: UIButton) {
         performSegue(withIdentifier: "presentCityList", sender:self)
     }
@@ -63,12 +84,22 @@ class AddEditViewController: UIViewController {
     func resetUI(){
         self.nameTextField.text = ""
         self.emailIdTextField.text = ""
-        self.anniversaryTextField.text = ""
+        self.selectedCity = nil
+        self.selectedCityLabel.text = "Click here for selection"
     }
     
-    @IBAction func marriageRadioButtonAction(_ sender: UISwitch) {
-        print("Radio Button value = \(sender.isOn)")
-        anniversaryTextField.isHidden = !sender.isOn
+    
+    func showToast(message:String, seconds:Double, backgrndColor: UIColor=UIColor.black, radius:CGFloat=15){
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.view.backgroundColor = backgrndColor
+        alert.view.alpha = 0.6
+        alert.view.layer.cornerRadius = radius
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+seconds) {
+            alert.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

@@ -11,6 +11,7 @@ import UIKit
 class EmployeesViewController: UITableViewController {
     
     lazy var employeeViewModel:EmployeeViewModel = EmployeeViewModel()
+    var selectedRow:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,18 @@ class EmployeesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        selectedRow = indexPath.row
+        performSegue(withIdentifier: "showEditPage", sender: self)
+        print("DidSelectRow Called")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showEditPage"{
+            if let nextViewController = segue.destination as? AddEditViewController {
+                nextViewController.isEditMode = true
+                nextViewController.employeeMO = employeeViewModel.employees?[selectedRow!]
+            }
+        }
     }
     
     @IBAction func addNewEmployeeAction(_ sender: Any) {
