@@ -24,6 +24,8 @@ class AddEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameTextField.delegate = self
+        emailIdTextField.delegate = self
         if isEditMode{
             nameTextField.text = employeeMO?.name
             emailIdTextField.text = employeeMO?.emailId
@@ -108,5 +110,12 @@ extension AddEditViewController: CitySelectDelegate{
     func setSelectedCity(city: String) {
         self.selectedCity = city
         self.selectedCityLabel.text = city
+    }
+}
+
+extension AddEditViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true;
     }
 }
