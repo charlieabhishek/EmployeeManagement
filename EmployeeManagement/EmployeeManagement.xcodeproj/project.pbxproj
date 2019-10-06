@@ -18,6 +18,7 @@
 		EF2B1A1A2344DDCC009A1CD5 /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2B1A192344DDCC009A1CD5 /* AddEditViewController.swift */; };
 		EF2B1A1F2344EAB5009A1CD5 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2B1A1E2344EAB5009A1CD5 /* EmployeeViewModel.swift */; };
 		EF2B1A212344EB23009A1CD5 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2B1A202344EB23009A1CD5 /* DatabaseService.swift */; };
+		EFF40885234A2B0600F87349 /* CitySelectorListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF40884234A2B0600F87349 /* CitySelectorListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		EF2B1A192344DDCC009A1CD5 /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		EF2B1A1E2344EAB5009A1CD5 /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
 		EF2B1A202344EB23009A1CD5 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		EFF40884234A2B0600F87349 /* CitySelectorListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectorListController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				EF2B19F82344C467009A1CD5 /* EmployeesViewController.swift */,
 				EF2B1A192344DDCC009A1CD5 /* AddEditViewController.swift */,
 				EF2B19FA2344C467009A1CD5 /* Main.storyboard */,
+				EFF40884234A2B0600F87349 /* CitySelectorListController.swift */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			files = (
 				EF2B19FF2344C467009A1CD5 /* EmployeeManagement.xcdatamodeld in Sources */,
 				EF2B1A212344EB23009A1CD5 /* DatabaseService.swift in Sources */,
+				EFF40885234A2B0600F87349 /* CitySelectorListController.swift in Sources */,
 				EF2B1A1A2344DDCC009A1CD5 /* AddEditViewController.swift in Sources */,
 				EF2B19F92344C467009A1CD5 /* EmployeesViewController.swift in Sources */,
 				EF2B19F52344C467009A1CD5 /* AppDelegate.swift in Sources */,
